@@ -1,0 +1,109 @@
+Create a table:
+CREATE TABLE employees (
+  eid INT,
+  ename STRING,
+  eage INT,
+  edepartment STRING
+);
+
+INSERT INTO TABLE employees VALUES (1, 'John Doe', 30, 'IT');
+
+SELECT * FROM employees;
+
+CREATE TABLE student (
+  student_id INT,
+  student_name STRING
+);
+
+
+INSERT INTO TABLE student VALUES
+  (1, 'Alice'),
+  (2, 'Bob'),
+  (3, 'Charlie');
+SELECT * FROM student;
+
+DELETE FROM student WHERE student_id = 2;
+
+
+
+
+
+1. CREATE:
+CREATE TABLE example_table (
+  id INT,
+  name STRING,
+  age INT
+);
+
+2. SHOW:
+SHOW TABLES;
+
+3. DESCRIBE:
+DESCRIBE example_table;
+
+4. USE:
+USE mydatabase;
+
+5. DROP:
+DROP TABLE example_table;
+
+6. ALTER:
+ALTER TABLE example_table ADD COLUMNS (email STRING);
+
+7. TRUNCATE:
+INSERT OVERWRITE TABLE example_table SELECT * FROM example_table WHERE 1=0;
+
+
+
+
+1. GROUP BY department:
+SELECT department, AVG(age) AS avg_age
+FROM employees
+GROUP BY department;
+
+2. WHERE any condition:
+SELECT *
+FROM employees
+WHERE department = 'IT' AND age > 25;
+
+3. HAVING:
+SELECT department, AVG(age) AS avg_age
+FROM employees
+GROUP BY department
+HAVING AVG(age) > 30;
+
+4. ORDER BY employee number:
+SELECT *
+FROM employees
+ORDER BY employee_number ASC;
+
+
+update:
+
+INSERT OVERWRITE TABLE employees
+SELECT
+  employee_id,
+  employee_name,
+  CASE WHEN employee_id = 123 THEN 50000 ELSE salary END AS salary
+FROM employees;
+
+1. EXPORT:
+EXPORT TABLE source_table TO 'hdfs://<exported_data_directory>';
+
+2. IMPORT:
+IMPORT TABLE destination_table FROM 'hdfs://<imported_data_directory>';
+
+3. SORT BY:
+SELECT *
+FROM employees
+SORT BY age DESC;
+
+4. DISTRIBUTE BY:
+SELECT *
+FROM employees
+DISTRIBUTE BY department;
+
+5. CLUSTER BY:
+SELECT *
+FROM employees
+CLUSTER BY department, age;
