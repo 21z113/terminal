@@ -80,12 +80,7 @@ ORDER BY employee_number ASC;
 
 update:
 
-INSERT OVERWRITE TABLE employees
-SELECT
-  employee_id,
-  employee_name,
-  CASE WHEN employee_id = 123 THEN 50000 ELSE salary END AS salary
-FROM employees;
+update Student s set e=s.marks=50 where s.studentId=10;
 
 1. EXPORT:
 EXPORT TABLE source_table TO 'hdfs://<exported_data_directory>';
