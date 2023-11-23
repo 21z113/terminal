@@ -1,0 +1,415 @@
+//bmi calculator
+
+import React,{useState} from 'react';
+import { Input } from 'react-native-elements';
+
+
+export default function App() {
+  
+  const [h,seth]  = useState("");
+  const [w,setw]  = useState("");
+  const [bmi,setbmi]  = useState("");
+
+  calbmi = () => {
+    setbmi(h*w);
+  }
+
+  return (
+    <View style={styles.container}>
+        <Input keyboardType='numeric' onChangeText={seth}></Input>
+        <Input keyboardType='numeric' onChangeText={setw}></Input>
+        <Button onPress={calbmi} title='Calculate'></Button>
+        <Text>Bmi:{bmi}</Text>
+    </View>
+  );
+}
+
+const styles= StyleSheet.create({
+  container:{
+    flex:1,
+    alignItems:'center',
+    justifyContent:"center",
+    flexDirection:"column",
+  }
+})
+
+
+----------------------------------------------------------------------------
+
+
+//color change
+import React, { useState } from 'react';
+import { Text,Button } from 'react-native-elements';
+import { View,StyleSheet } from 'react-native';
+
+const ColorChanger = () => {
+  const [textColor, setTextColor] = useState('black');
+
+  const changeColor = () => {
+    setTextColor("red");
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text style={{ color: textColor }}>
+        This is some text with dynamic color!
+      </Text>
+      <Button onPress={changeColor} title='Change Color'>
+        
+      </Button>
+    </View>
+  );
+};
+const styles = StyleSheet.create({
+  container:{
+    flex:1,
+    justifyContent:"center",
+    alignItems:"center",
+    flexDirection:"column",
+  }
+});
+
+export default ColorChanger;
+
+
+
+
+
+-----------------------------------------------------------------------------
+//expense manager
+
+import { Button, StyleSheet, Text, View } from 'react-native';
+import React,{useState} from 'react';
+import { Input } from 'react-native-elements';
+
+
+export default function App() {
+  
+  const [a,seta]  = useState(0);
+  const [r,setr]  = useState(0);
+  const [t,sett]  = useState(0);
+
+  calt1 = () => {
+    sett(parseInt(t)+parseInt(a));
+  }
+  calt2 = () => {
+    sett(t-r);
+  }
+
+  return (
+    <View style={styles.container}>
+
+        <Input keyboardType='numeric' onChangeText={seta}></Input>
+        <Button onPress={calt1} title='Add Income'></Button>
+        <Input keyboardType='numeric' onChangeText={setr}></Input>
+        <Button onPress={calt2} title='Add Expense'></Button>
+        <Text>Amount:{t}</Text>
+    </View>
+  );
+}
+
+const styles= StyleSheet.create({
+  container:{
+    flex:1,
+    alignItems:'center',
+    justifyContent:"center",
+    flexDirection:"column",
+  }
+})
+
+
+
+
+-----------------------------------------------------------------------------
+
+//align
+
+import React, { useState } from 'react';
+import { Text, Button } from 'react-native-elements';
+import { View, StyleSheet } from 'react-native';
+
+const ColorChanger = () => {
+  const [align, setAlign] = useState('center'); // State to manage text alignment
+
+  const changeAlign1 = () => {
+    setAlign('left'); // Function to change alignment state to 'left'
+  };
+  const changeAlign2 = () => {
+    setAlign('center'); // Function to change alignment state to 'left'
+  };
+  const changeAlign3 = () => {
+    setAlign('right'); // Function to change alignment state to 'left'
+  };
+
+  return (
+    <View style={{flex:1,justifyContent:"center",alignItems:align,justifyContent:"center"}}>
+      <Text style={{ textAlign: align }}>
+        Hello
+      </Text>
+      <Button onPress={changeAlign1} title='Left' />
+      <Button onPress={changeAlign2} title='center' />
+      <Button onPress={changeAlign3} title='right' />
+    </View>
+  );
+};
+
+
+
+export default ColorChanger;
+
+
+
+-----------------------------------------------------------
+
+//login page
+
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, TextInput, Button, Alert } from 'react-native';
+const LoginPage = () => {
+const [username, setUsername] = useState('');
+const [password, setPassword] = useState('');
+const handleLogin = () => {
+// Simple validation
+if (username === 'user' && password === 'password') {
+Alert.alert('Login Successful', 'Welcome back, User!');
+} else {
+Alert.alert('Login Failed', 'Invalid username or password. Please try again.');
+}
+};
+return (
+<View style={styles.container}>
+<Text style={styles.title}>Login</Text>
+<TextInput
+style={styles.input}
+placeholder="Username"
+onChangeText={(text) => setUsername(text)}
+value={username}
+/>
+<TextInput
+style={styles.input}
+placeholder="Password"
+secureTextEntry
+onChangeText={(text) => setPassword(text)}
+value={password}
+/>
+<Button
+title="Login"
+onPress={handleLogin}
+/>
+</View>
+);
+};
+const styles = StyleSheet.create({
+container: {
+flex: 1,
+justifyContent: 'center',
+alignItems: 'center',
+padding: 16,
+},
+title: {
+fontSize: 24,
+marginBottom: 16,
+},
+input: {
+height: 40,
+borderColor: 'gray',
+borderWidth: 1,
+marginBottom: 16,
+padding: 8,
+width: '100%',
+},
+});
+export default LoginPage;
+
+
+---------------------------------------------------------------
+//navigation
+
+
+
+npm install @react-navigation/native @react-navigation/stack
+// App.js
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import HomePage from './components/HomePage';
+import NextPage from './components/NextPage';
+const Stack = createStackNavigator();
+const App = () => {
+return (
+<NavigationContainer>
+<Stack.Navigator initialRouteName="Home">
+<Stack.Screen name="Home" component={HomePage} />
+<Stack.Screen name="NextPage" component={NextPage} />
+</Stack.Navigator>
+</NavigationContainer>
+);
+};
+export default App;
+// components/HomePage.js
+import React from 'react';
+import { View, Text, Button, StyleSheet } from 'react-native';
+const HomePage = ({ navigation }) => {
+const navigateToNextPage = () => {
+navigation.navigate('NextPage');
+};
+return (
+<View style={styles.container}>
+<Text style={styles.title}>Home Page</Text>
+<Button
+title="Go to Next Page"
+onPress={navigateToNextPage}
+/>
+</View>
+);
+};
+const styles = StyleSheet.create({
+container: {
+flex: 1,
+justifyContent: 'center',
+alignItems: 'center',
+},
+title: {
+fontSize: 24,
+marginBottom: 16,
+},
+});
+export default HomePage;
+// components/NextPage.js
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+const NextPage = () => {
+return (
+<View style={styles.container}>
+<Text style={styles.title}>Next Page</Text>
+</View>
+);
+};
+const styles = StyleSheet.create({
+container: {
+flex: 1,
+justifyContent: 'center',
+alignItems: 'center',
+},
+title: {
+fontSize: 24,
+marginBottom: 16,
+},
+});
+export default NextPage;
+
+
+
+
+
+------------------------------------------------------------------
+
+
+//unit conversion
+npm install @react-native-picker/picker
+
+import React, { useState } from 'react';
+import { View, Text, TextInput, Button, StyleSheet} from 'react-native';
+import { Picker } from '@react-native-picker/picker';
+
+const UnitConverter = () => {
+  const [inputValue, setInputValue] = useState('');
+  const [convertedValue, setConvertedValue] = useState('');
+  const [selectedConverter, setSelectedConverter] = useState('kmToMiles');
+
+  const convertUnits = () => {
+    const input = parseFloat(inputValue);
+
+    if (!isNaN(input)) {
+      let result;
+      switch (selectedConverter) {
+        case 'kmToMiles':
+          result = (input / 1.60934).toFixed(2) + ' miles';
+          break;
+        case 'kgToPounds':
+          result = (input * 2.20462).toFixed(2) + ' pounds';
+          break;
+        case 'celsiusToFahrenheit':
+          result = ((input * 9) / 5 + 32).toFixed(2) + ' °F';
+          break;
+        case 'litersToGallons':
+          result = (input * 0.264172).toFixed(2) + ' gallons';
+          break;
+        default:
+          result = 'Invalid input';
+      }
+      setConvertedValue(result);
+    } else {
+      setConvertedValue('Invalid input');
+    }
+  };
+
+  const clearFields = () => {
+    setInputValue('');
+    setConvertedValue('');
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Unit Converter</Text>
+      <Text style={styles.label}>Choose Converter:</Text>
+      <Picker
+        style={styles.picker}
+        selectedValue={selectedConverter}
+        onValueChange={(itemValue) => setSelectedConverter(itemValue)}
+      >
+        <Picker.Item label="Kilometers to Miles" value="kmToMiles" />
+        <Picker.Item label="Kilograms to Pounds" value="kgToPounds" />
+        <Picker.Item label="Celsius to Fahrenheit" value="celsiusToFahrenheit" />
+        <Picker.Item label="Liters to Gallons" value="litersToGallons" />
+      </Picker>
+      <Text style={styles.label}>Enter value:</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Enter value"
+        keyboardType="numeric"
+        value={inputValue}
+        onChangeText={(text) => setInputValue(text)}
+      />
+      <Button onPress={convertUnits} title="Convert" />
+      <Text style={styles.result}>{convertedValue}</Text>
+      <Button onPress={clearFields} title="Clear" />
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 20,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  label: {
+    fontSize: 18,
+    marginBottom: 5,
+  },
+  picker: {
+    width: '100%',
+    marginBottom: 10,
+  },
+  input: {
+    width: '100%',
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    marginBottom: 10,
+    paddingLeft: 10,
+  },
+  result: {
+    fontSize: 18,
+    marginTop: 10,
+  },
+});
+
+export default UnitConverter;
